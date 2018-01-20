@@ -3,8 +3,6 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.List;
 
-// You will use Collections.sort() to sort the coins
-
 /**
  *  A coin purse contains coins.
  *  You can insert coins, withdraw money, check the balance,
