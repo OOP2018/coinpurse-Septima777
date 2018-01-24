@@ -1,6 +1,8 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,10 +66,7 @@ public class Purse {
      *  @return true if purse is full.
      */
     public boolean isFull() {
-        if(money.size() == capacity){
-        	return true;
-        }
-        return false;
+        return money.size() == capacity;
     }
 
     /** 
@@ -80,7 +79,7 @@ public class Purse {
     public boolean insert( Coin coin ) {
         // if the purse is already full then can't insert anything.
     	if(coin.getValue() <= 0) return false;
-        if(money.size() != capacity){
+        if(!isFull()){
         	return money.add(coin);
         }
         return false;
@@ -96,8 +95,9 @@ public class Purse {
      */
     public Coin[] withdraw( double amount ) {
     	if(amount < 0) return null;
-    	if(getBalance() < amount) return null;
     	List<Coin> templist = new ArrayList<Coin>();
+    	Collections.sort(money);
+    	Collections.reverse(money);
     	for(int i = 0; i < money.size(); i++){
     		if(amount >= money.get(i).getValue()){
     			templist.add(money.get(i));
@@ -106,10 +106,11 @@ public class Purse {
     	}
     	if(amount != 0) return null;
     	if(amount == 0){
-    		for (Coin coin: templist) {
-				money.remove(coin);
+    		for (Coin withDrawnCoin: templist) {
+				money.remove(withDrawnCoin);
 			}
     	}
+    	if(getBalance() < amount) return null;
     	Coin[] array = new Coin[templist.size()];
     	templist.toArray(array);
     	
@@ -119,6 +120,7 @@ public class Purse {
     /** 
      * toString returns a string description of the purse contents.
      * It can return whatever is a useful description.
+     * @return description of the purse contents.
      */
     public String toString() {
       	return count()+" coins with value "+ getBalance();

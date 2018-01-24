@@ -43,6 +43,7 @@ public class Coin implements Comparable<Coin> {
 	/**
 	 * Check value and currency of coins that it equals to the other or not.
 	 * If they have the same value and same currency it return true.
+	 * @return true if it equals and return false if it does not equals.
 	 */
 	public boolean equals(Object arg) {
 		if (arg == null)
@@ -67,47 +68,19 @@ public class Coin implements Comparable<Coin> {
 	/**
 	 * Order coins by value so that smaller value of coins come first and ignore currency.
 	 * @return ordered coins value.
-	 */
+	 */	
 	@Override
 	public int compareTo(Coin o) {
-		if (this.currency.equals(o.getCurrency())) {
-			if (this.value < o.getValue())
-				return -1;
-			if (this.value > o.getValue())
-				return 1;
-			if (this.value == o.getValue())
-				return 0;
-		}
-		return this.currency.compareTo(o.getCurrency());
-	}
-	
-	/**
-	 * Print value and currency of coins
-	 * @param coins are coins in the list.
-	 */
-	public static void printCoins(List<Coin> coins){
-		for(Coin coin : coins){
-			System.out.println(coin.getValue()+"-"+coin.getCurrency());
+		if (this.value < o.getValue()){
+			return -1;
+		}else if (this.value > o.getValue()){
+			return 1;
+		}else{
+			return 0;
 		}
 	}
 	
-
-	/**
-	 * run the program for check printCoins method and compareTo method.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		List<Coin> coins = new ArrayList<Coin>();
-		coins.add(new Coin(10.0, "Baht"));
-		coins.add(new Coin(10.0, "Dollar"));
-		coins.add(new Coin(1.0, "Baht"));
-		coins.add(new Coin(1.5, "Baht"));
-		printCoins(coins);
-		Collections.sort(coins);
-		System.out.println("==========================================");
-		printCoins(coins);
-		
-	}
+	
 	
 	
 }
