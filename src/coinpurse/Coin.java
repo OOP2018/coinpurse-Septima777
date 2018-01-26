@@ -44,6 +44,7 @@ public class Coin implements Comparable<Coin> {
 	 * Check value and currency of coins that it equals to the other or not.
 	 * If they have the same value and same currency it return true.
 	 * @return true if it equals and return false if it does not equals.
+	 * @param coin that we have to check.
 	 */
 	public boolean equals(Object arg) {
 		if (arg == null)
@@ -68,6 +69,7 @@ public class Coin implements Comparable<Coin> {
 	/**
 	 * Order coins by value so that smaller value of coins come first and ignore currency.
 	 * @return ordered coins value.
+	 * @param the other coin that we have to compare.
 	 */	
 	@Override
 	public int compareTo(Coin o) {
