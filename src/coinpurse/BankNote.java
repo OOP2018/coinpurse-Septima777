@@ -10,7 +10,7 @@ public class BankNote implements Valuable{
 	private String currency;
 	private double value;
 	private long serialNumber;
-	private final long nextSerialNumber = 1000000;
+	private static long nextSerialNumber = 1000000;
 	
 	/**
 	 * * Initialize value and currency of bank notes.
@@ -20,7 +20,7 @@ public class BankNote implements Valuable{
 	public BankNote(double value, String currency) {
 		this.value = value;
 		this.currency = currency;
-		this.serialNumber = nextSerialNumber;
+		this.serialNumber = nextSerialNumber++;
 	}
 	
 	/**
@@ -70,7 +70,6 @@ public class BankNote implements Valuable{
 	 * @return the serial number of bank note.
 	 */
 	public long getSerial(){
-		this.serialNumber++;
 		return serialNumber;
 	}
 
