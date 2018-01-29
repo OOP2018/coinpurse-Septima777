@@ -1,16 +1,12 @@
 package coinpurse;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
- * Coin that show its value and currency.
+ * Coins in the purse that show its value and currency.
  * @author Noppawan Kulchol
  *
  */
-public class Coin implements Comparable<Coin> {
+public class Coin implements Valuable {
 	private double value;
 	private String currency;
 	
@@ -72,7 +68,7 @@ public class Coin implements Comparable<Coin> {
 	 * @param the other coin that we have to compare.
 	 */	
 	@Override
-	public int compareTo(Coin o) {
+	public int compareTo(Valuable o) {
 		if (this.value < o.getValue()){
 			return -1;
 		}else if (this.value > o.getValue()){
@@ -80,6 +76,7 @@ public class Coin implements Comparable<Coin> {
 		}else{
 			return 0;
 		}
+		
 	}
 	
 	

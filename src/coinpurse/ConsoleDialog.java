@@ -1,4 +1,4 @@
-package coinpurse;
+ package coinpurse;
  
 import java.util.Scanner;
 
@@ -83,9 +83,9 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            Coin coin = makeMoney(value);
-            System.out.printf("Deposit %s... ", coin.toString() );
-            boolean ok = purse.insert(coin);
+            Valuable valuable = makeMoney(value);
+            System.out.printf("Deposit %s... ", valuable.toString() );
+            boolean ok = purse.insert(valuable);
             System.out.println( (ok? "ok" : "FAILED") );
         }
         if ( scanline.hasNext() )
@@ -109,13 +109,13 @@ public class ConsoleDialog {
         
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
-             Coin [] coins = purse.withdraw(amount);
-             if ( coins == null ) 
+             Valuable [] value = purse.withdraw(amount);
+             if ( value == null ) 
                 System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
              else {
                 System.out.print("You withdrew:");
-                for(int k=0; k<coins.length; k++) {
-                	System.out.print((k==0?" ":", ") + coins[k].toString() );
+                for(int k=0; k<value.length; k++) {
+                	System.out.print((k==0?" ":", ") + value[k].toString() );
                 }
                 System.out.println();
             }
@@ -125,7 +125,10 @@ public class ConsoleDialog {
     }
     
     /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Coin makeMoney(double value) {
+    private Valuable makeMoney(double value) {
+    	if(value>=20){
+    		return new BankNote(value, CURRENCY);
+    	}
     	return new Coin(value, CURRENCY);
     }
 
