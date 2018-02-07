@@ -2,7 +2,7 @@ package coinpurse;
 
 /**
  * Bank notes in the purse that show its value and currency.
- * @author Septima
+ * @author Noppawan Kulchol
  *
  */
 public class BankNote implements Valuable{
