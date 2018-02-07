@@ -106,7 +106,7 @@ public class Purse {
     	if(amount < 0) return null;
     	List<Valuable> templist = new ArrayList<Valuable>();
     	Comparator<Valuable> comp = new ValueComparator();
-    	Collections.sort(money);
+    	Collections.sort(money,comp);
     	Collections.reverse(money);
     	for(int i = 0; i < money.size(); i++){
     		if(amount >= money.get(i).getValue()){
