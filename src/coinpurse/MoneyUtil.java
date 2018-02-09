@@ -59,8 +59,8 @@ public class MoneyUtil {
 		value.add(new BankNote(50.0, "Baht"));
 		value.add(new BankNote(20.0, "Baht"));
 		value.add(new Coin(1.5, "Baht"));
+		value.add(new BankNote(20.0, "Baht"));
 		printValue(value);
-//		Collections.sort(value);
 		sortCoins(value);
 		System.out.println("==========================================");
 		printValue(value);

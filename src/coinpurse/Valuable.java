@@ -9,14 +9,12 @@ public interface Valuable extends Comparable<Valuable>{
 	
 	/**
 	 * Get the value of coins and banknotes.
-	 * @return value of coins and banknotes.
 	 */
 	public double getValue();
 	
 	
 	/**
 	 * Get the currency of coins and banknotes.
-	 * @return currency of coins and banknotes.
 	 */
 	public String getCurrency();
 	
