@@ -107,30 +107,32 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {
-		if (amount < 0)
-			return null;
-		List<Valuable> templist = new ArrayList<Valuable>();
-		Collections.sort(money, comp);
-		Collections.reverse(money);
-		for (int i = 0; i < money.size(); i++) {
-			Valuable m = money.get(i);
-			if (amount >= m.getValue()) {
-				templist.add(m);
-				amount = amount - m.getValue();
-			}
-		}
-		if (amount != 0)
-			return null;
-		for (Valuable withDrawnValue : templist) {
-			money.remove(withDrawnValue);
-		}
-		if (getBalance() < amount)
-			return null;
-
-		Valuable[] array = new Valuable[templist.size()];
-		templist.toArray(array);
-
-		return array;
+//		if (amount < 0)
+//			return null;
+//		List<Valuable> templist = new ArrayList<Valuable>();
+//		Collections.sort(money, comp);
+//		Collections.reverse(money);
+//		for (int i = 0; i < money.size(); i++) {
+//			Valuable m = money.get(i);
+//			if (amount >= m.getValue()) {
+//				templist.add(m);
+//				amount = amount - m.getValue();
+//			}
+//		}
+//		if (amount != 0)
+//			return null;
+//		for (Valuable withDrawnValue : templist) {
+//			money.remove(withDrawnValue);
+//		}
+//		if (getBalance() < amount)
+//			return null;
+//
+//		Valuable[] array = new Valuable[templist.size()];
+//		templist.toArray(array);
+//
+//		return array;
+		Money money = new Money(amount, "Baht");
+		return withdraw(money);
 	}
 
 	/**
@@ -153,8 +155,8 @@ public class Purse {
 		for (int i = 0; i < money.size(); i++) {
 			Valuable m = money.get(i);
 			if (monty >= m.getValue() && amount.getCurrency().equalsIgnoreCase(m.getCurrency())) {
-				templist.add(m);
 				monty = monty - m.getValue();
+				templist.add(m);
 			}
 		}
 		if (monty != 0)

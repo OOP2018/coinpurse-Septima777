@@ -24,24 +24,6 @@ public class Coin extends Money{
 	public String toString() {
 		return getValue() + "-" + getCurrency();
 	}
-
-	/**
-	 * Order coins by value so that smaller value of coins come first and ignore currency.
-	 * @return ordered coins value.
-	 * @param the other coin that we have to compare.
-	 */	
-	@Override
-	public int compareTo(Valuable o) {
-		if (this.value < o.getValue()){
-			return -1;
-		}else if (this.value > o.getValue()){
-			return 1;
-		}else{
-			return 0;
-		}
-		
-	}
-	
 	
 	
 	

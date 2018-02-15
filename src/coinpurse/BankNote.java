@@ -39,20 +39,5 @@ public class BankNote extends Money{
 		return serialNumber;
 	}
 	
-	/**
-	 * Order bank note by value so that smaller value of bank note come first and ignore currency.
-	 * @return ordered bank note value.
-	 * @param the other bank note that we have to compare.
-	 */	
-	@Override
-	public int compareTo(Valuable o) {
-		if (this.value < o.getValue()){
-			return -1;
-		}else if (this.value > o.getValue()){
-			return 1;
-		}else{
-			return 0;
-		}
-	}
 
 }
