@@ -1,11 +1,20 @@
 package coinpurse;
 
-
+/**
+ * This abstract class is factory that can create money for Thai and Malaysia by
+ * setFactory() and it is Singleton.
+ * @author Noppawan Kulchol
+ *
+ */
 public abstract class MoneyFactory {
 
+	/** declare money factory */
 	private static MoneyFactory instance;
-	protected long nextSerialNumber = 1000000;
 	
+	/**
+	 * Get an instance of MoneyFactory instead of creating new instance of it.
+	 * @return instance is new MoneyFactory
+	 */
 	public static MoneyFactory getInstance(){
 		if(instance == null){
 			instance = ReadFile.read();
@@ -13,35 +22,35 @@ public abstract class MoneyFactory {
 		return instance;		
 	}
 	
+	/**
+	 * create money (coins or bank notes)
+	 * @param value is money value
+	 * @return new value of money
+	 */
 	public abstract Valuable createMoney(double value);
 
+	/**
+	 * create money (coins or bank notes)
+	 * @param value is money value
+	 * @return new value of money
+	 */
 	public Valuable createMoney(String value){
 		double dValue = 0;
 		try {
 			dValue = Double.parseDouble(value);
-		} catch (IllegalArgumentException e) {
-			System.out.println("Not valid");
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(value +" cannot be parsed as a double");
 		}
 		return createMoney(dValue);
 	}
 	
+	/**
+	 * set factory to be other money factory (such as set from 
+	 * ThaiMoneyFactory to be MalayMoneyFactory).
+	 * @param f
+	 */
 	public static void setFactory(MoneyFactory f){
-		MoneyFactory.instance = f;
-	}
-	
-	public static void main(String[] args) {
-		MoneyFactory factory = MoneyFactory.getInstance();
-		Valuable m = factory.createMoney(5);
-		System.out.println(m.toString());
-		Valuable m2 = factory.createMoney(0.05);
-		System.out.println(m2.getCurrency());
-		System.out.println(m2.toString());
-		Valuable m3 = factory.createMoney(50);
-		System.out.println(m3.toString());
-		Valuable m5 = factory.createMoney(3000);
-		System.out.println(m5.toString());
-		Valuable m4 = factory.createMoney(1000);
-		System.out.println(m4.toString());
-	}
+		instance = f;
+	}	
 
 }

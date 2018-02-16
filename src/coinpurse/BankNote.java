@@ -8,7 +8,6 @@ package coinpurse;
 public class BankNote extends Money{
 	
 	private long serialNumber;
-//	private static long nextSerialNumber = 1000000;
 	
 	/**
 	 * * Initialize value and currency of bank notes.

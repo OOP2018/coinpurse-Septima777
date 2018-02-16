@@ -1,6 +1,7 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -107,30 +108,6 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {
-//		if (amount < 0)
-//			return null;
-//		List<Valuable> templist = new ArrayList<Valuable>();
-//		Collections.sort(money, comp);
-//		Collections.reverse(money);
-//		for (int i = 0; i < money.size(); i++) {
-//			Valuable m = money.get(i);
-//			if (amount >= m.getValue()) {
-//				templist.add(m);
-//				amount = amount - m.getValue();
-//			}
-//		}
-//		if (amount != 0)
-//			return null;
-//		for (Valuable withDrawnValue : templist) {
-//			money.remove(withDrawnValue);
-//		}
-//		if (getBalance() < amount)
-//			return null;
-//
-//		Valuable[] array = new Valuable[templist.size()];
-//		templist.toArray(array);
-//
-//		return array;
 		Money money = new Money(amount, "Baht");
 		return withdraw(money);
 	}
@@ -147,27 +124,25 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(Valuable amount) {
 		double monty = amount.getValue();
-		if (monty < 0)
-			return null;
+		String currency = amount.getCurrency();
+		if (monty <= 0) return null;
 		List<Valuable> templist = new ArrayList<Valuable>();
 		Collections.sort(money, comp);
 		Collections.reverse(money);
+//		int mm = Arrays.binarySearch(money, );
 		for (int i = 0; i < money.size(); i++) {
 			Valuable m = money.get(i);
-			if (monty >= m.getValue() && amount.getCurrency().equalsIgnoreCase(m.getCurrency())) {
+			if (monty >= m.getValue() && currency.equalsIgnoreCase(m.getCurrency())) {
 				monty = monty - m.getValue();
 				templist.add(m);
 			}
 		}
-		if (monty != 0)
-			return null;
-		if (monty == 0) {
-			for (Valuable withDrawnValue : templist) {
-				money.remove(withDrawnValue);
-			}
+		if (monty != 0)	return null;
+		for (Valuable withDrawnValue : templist) {
+			money.remove(withDrawnValue);
 		}
-		if (getBalance() < monty)
-			return null;
+//		if (getBalance() < monty)
+//			return null;
 
 		Valuable[] array = new Valuable[templist.size()];
 		templist.toArray(array);

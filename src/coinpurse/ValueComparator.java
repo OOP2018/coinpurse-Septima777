@@ -22,16 +22,11 @@ public class ValueComparator implements Comparator<Valuable> {
 	 */
 	@Override
 	public int compare(Valuable o1, Valuable o2) {
-		if(o1.getCurrency().compareToIgnoreCase(o2.getCurrency()) == 0){
-			if(o1.getValue()>o2.getValue()){
-				return 1;
-			}else if(o1.getValue()<o2.getValue()){
-				return -1;
-			}else{
-				return 0;
-			}
+		int moneyCurrency = o1.getCurrency().compareToIgnoreCase(o2.getCurrency()); 
+		if(moneyCurrency == 0){
+			Double.compare(o1.getValue(), o2.getValue());
 		}
-		return o1.getCurrency().compareToIgnoreCase(o2.getCurrency());
+		return moneyCurrency;
 	}
 
 }

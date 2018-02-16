@@ -48,16 +48,12 @@ public class Money implements Valuable {
 	@Override
 	public int compareTo(Valuable arg) {
 
-		if (this.getCurrency().compareToIgnoreCase(arg.getCurrency()) == 0) {
-			if (this.getValue() > arg.getValue()) {
-				return 1;
-			} else if (this.getValue() < arg.getValue()) {
-				return -1;
-			} else {
-				return 0;
-			}
+		int moneyCurrency = this.getCurrency().compareToIgnoreCase(arg.getCurrency()); 
+		if(moneyCurrency == 0){
+			Double.compare(this.getValue(), arg.getValue());
 		}
-		return this.getCurrency().compareToIgnoreCase(arg.getCurrency());
+		return moneyCurrency;
+	
 	}
 
 	/**
