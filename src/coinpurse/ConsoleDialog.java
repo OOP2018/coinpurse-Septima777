@@ -19,6 +19,8 @@ public class ConsoleDialog {
     // Shorter prompt shown subsequently
     final String SHORT_PROMPT = "\nEnter d, w, ?, or q: ";
     
+    private MoneyFactory moneyFactory = MoneyFactory.getInstance();
+    
 	// The dialog receives a Purse object by dependency injection (as parameter to constructor)
     // so don't create a Purse here.
     private Purse purse;
@@ -122,14 +124,6 @@ public class ConsoleDialog {
         }
         else System.out.printf("Invalid amount: "+inline );
         scanline.close();
-    }
-    
-    /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Valuable makeMoney(double value) {
-    	if(value>=20){
-    		return new BankNote(value, CURRENCY);
-    	}
-    	return new Coin(value, CURRENCY);
     }
 
 }

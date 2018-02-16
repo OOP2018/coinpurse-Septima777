@@ -53,19 +53,19 @@ public class MoneyUtil {
 	 * run the program for check printCoins method and compareTo method.
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		List<Valuable> value = new ArrayList<Valuable>();
-		value.add(new Coin(10.0, "ht"));
-		value.add(new BankNote(50.0, "Baht"));
-		value.add(new BankNote(20.0, "Baht"));
-		value.add(new Coin(1.5, "Baht"));
-		value.add(new BankNote(20.0, "Baht"));
-		printValue(value);
-		sortCoins(value);
-		System.out.println("==========================================");
-		printValue(value);
-		System.out.println("==========================================");
-		System.out.println(filterByCurrency(value, "Baht"));
-		
-	}
+//	public static void main(String[] args) {
+//		List<Valuable> value = new ArrayList<Valuable>();
+//		value.add(new Coin(10.0, "ht"));
+//		value.add(new BankNote(50.0, "Baht"));
+//		value.add(new BankNote(20.0, "Baht"));
+//		value.add(new Coin(1.5, "Baht"));
+//		value.add(new BankNote(20.0, "Baht"));
+//		printValue(value);
+//		sortCoins(value);
+//		System.out.println("==========================================");
+//		printValue(value);
+//		System.out.println("==========================================");
+//		System.out.println(filterByCurrency(value, "Baht"));
+//		
+//	}
 }

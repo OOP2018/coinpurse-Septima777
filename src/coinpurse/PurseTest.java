@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.javafx.image.IntPixelAccessor;
+
 /**
  * Test the Purse using JUnit.
  * This is a JUnit 4 test suite.  
@@ -24,6 +26,7 @@ public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
 	private static final String CURRENCY = "Baht";
+	protected MoneyFactory moneyFactory = MoneyFactory.getInstance(); 
 	
     /**
      * Sets up the test fixture.
@@ -34,13 +37,19 @@ public class PurseTest {
     	// nothing to initialize
     }
     
+    @After
+    public void clearMoneyFactory() {
+    	MoneyFactory.setFactory(new ThaiMoneyFactory());
+    	moneyFactory = MoneyFactory.getInstance();
+    }
+    
     /** Make a coin with the default currency. To save typing "new Coin(...)" */
-    private Money makeCoin(double value) {
-		return new Coin(value,CURRENCY);
+    private Valuable makeCoin(double value) {
+		return moneyFactory.createMoney(value);
 	}
     
-    private Money makeBankNote(double value) {
-    	return new BankNote(value, CURRENCY);
+    private Valuable makeBankNote(double value) {
+    	return moneyFactory.createMoney(value);
     }
 
     /** Easy test that the Purse constructor is working. */
@@ -60,10 +69,10 @@ public class PurseTest {
     public void testInsert()
     {
         Purse purse = new Purse(4);
-        Money coin1 = makeCoin(5);
-        Money coin2 = makeCoin(10);
-        Money coin3 = makeCoin(1);
-        Money bankNote = makeBankNote(20);
+        Valuable coin1 = makeCoin(5);
+        Valuable coin2 = makeCoin(10);
+        Valuable coin3 = makeCoin(1);
+        Valuable bankNote = makeBankNote(20);
         assertTrue( purse.insert(coin1));
         assertTrue( purse.insert(coin3));
         assertTrue( purse.insert(coin2));
@@ -79,16 +88,18 @@ public class PurseTest {
     public void testInsertNoValue()
     {
         Purse purse = new Purse(3);
-        Money fakeCoin = new Coin(0, CURRENCY);
-        Money fakeCoin2 = new BankNote(0, CURRENCY);
+        Valuable fakeCoin = moneyFactory.createMoney(0);
+        Valuable fakeCoin2 = moneyFactory.createMoney(0);
         assertFalse( purse.insert(fakeCoin) );
         assertFalse( purse.insert(fakeCoin2) );
+        asset
     }
 
 
     @Test(timeout=1000)
     public void testIsFull()
     {   // borderline case (capacity 1)
+    	int[] values = new int[] {20,100,500,1000};
         Purse purse = new Purse(1);
         assertFalse( purse.isFull() );
         purse.insert( makeCoin(1) );
@@ -96,9 +107,9 @@ public class PurseTest {
         // real test
         int capacity = 4;
         purse = new Purse(capacity);
-        for(int k=1; k<=capacity; k++) {
+        for(int k=0; k<values.length; k++) {
             assertFalse(purse.isFull());
-            purse.insert( makeBankNote(k) );
+            purse.insert( makeBankNote(values[k]) );
         }
         // should be full now
         assertTrue( purse.isFull() );
@@ -114,8 +125,8 @@ public class PurseTest {
 		int capacity = 5;
 		double value = 10.0;
 		Purse purse = new Purse(capacity);
-		Money coin = new Coin(value, "THB");
-		Money bankNote = new BankNote(value, "THB");
+		Valuable coin = moneyFactory.createMoney(value);
+		Valuable bankNote = moneyFactory.createMoney(value);
 		assertTrue( purse.insert(coin) );
 		assertTrue( purse.insert(coin) ); // should be allowed
 		assertTrue( purse.insert(coin) ); // should be allowed
@@ -132,7 +143,7 @@ public class PurseTest {
 		
 		for(double value : values) {
 //			Money coin = makeCoin(value);
-			Money bankNote = makeBankNote(value);
+			Valuable bankNote = makeBankNote(value);
 			assertTrue(purse.insert(bankNote));
 			assertEquals(value,  purse.getBalance(), TOL);
 			Valuable [] result = purse.withdraw(value);
