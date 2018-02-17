@@ -20,18 +20,21 @@ public class Main {
     	ui.run();
     	
     	// 4. run the moneyFactory
-    	MoneyFactory factory = MoneyFactory.getInstance();
-		Valuable m = factory.createMoney(5);
-		System.out.println(m.toString());
-		Valuable m2 = factory.createMoney(0.05);
-		System.out.println(m2.getCurrency());
-		System.out.println(m2.toString());
-		Valuable m3 = factory.createMoney(50);
-		System.out.println(m3.toString());
-		Valuable m5 = factory.createMoney(3000);
-		System.out.println(m5.toString());
-		Valuable m4 = factory.createMoney(1000);
-		System.out.println(m4.toString());
+//    	MoneyFactory.setFactory(new ThaiMoneyFactory());
+//    	MoneyFactory factory = MoneyFactory.getInstance();
+//		Valuable m = factory.createMoney(500);
+//		System.out.println(m.toString());
+//		Valuable m2 = factory.createMoney(50);
+////		System.out.println(m2.getCurrency());
+//		System.out.println(m2.toString());
+//		Valuable m3 = factory.createMoney(1000);
+//		System.out.println(m3.toString());
+//		Valuable m5 = factory.createMoney(3000);
+//		System.out.println(m5.toString());
+//		Valuable m4 = factory.createMoney(1000);
+//		System.out.println(m4.toString());
 
+//		System.out.println(m.getValue() );
+//		System.out.println((BankNote)m);
     }
 }

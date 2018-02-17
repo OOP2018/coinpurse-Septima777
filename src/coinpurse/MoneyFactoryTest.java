@@ -59,9 +59,17 @@ public class MoneyFactoryTest {
 		assertEquals(((BankNote) bankNote4).getSerial(), 1000000000);
 		assertEquals(((BankNote) bankNote5).getSerial(), 1000000001);
 		assertEquals(((BankNote) bankNote6).getSerial(), 1000000002);
-
 	}
 
-	// @Test
-	// public void
+	
+	@Test
+	 public void testCreateMoney(){
+		MoneyFactory.setFactory(new ThaiMoneyFactory());
+		MoneyFactory moneyFactory = MoneyFactory.getInstance();
+		Valuable bankNote1 = moneyFactory.createMoney(20);
+		Valuable bankNote2 = moneyFactory.createMoney(100); 
+		assertEquals(bankNote1.getValue(), 20);
+	 }
+	
+	
 }

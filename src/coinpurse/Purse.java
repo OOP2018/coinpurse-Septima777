@@ -91,7 +91,7 @@ public class Purse {
 			return false;
 		if (!isFull()) {
 			money.add(value);
-			Collections.sort(money, new ValueComparator());
+			Collections.sort(money,new ValueComparator());
 			return true;
 		}
 		return false;
@@ -102,8 +102,7 @@ public class Purse {
 	 * withdrawn from purse, or return null if cannot withdraw the amount
 	 * requested.
 	 * 
-	 * @param amount
-	 *            is the amount to withdraw
+	 * @param amount is the amount to withdraw
 	 * @return array of Money objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
@@ -117,19 +116,17 @@ public class Purse {
 	 * withdrawn from purse, or return null if cannot withdraw the amount
 	 * requested but it return just the same currency.
 	 * 
-	 * @param amount
-	 *            is the amount to withdraw
+	 * @param amount is the amount to withdraw
 	 * @return array of Money objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(Valuable amount) {
 		double monty = amount.getValue();
 		String currency = amount.getCurrency();
-		if (monty <= 0) return null;
+		if (monty < 0) return null;
 		List<Valuable> templist = new ArrayList<Valuable>();
 		Collections.sort(money, comp);
-		Collections.reverse(money);
-//		int mm = Arrays.binarySearch(money, );
+		Collections.reverse(money); 
 		for (int i = 0; i < money.size(); i++) {
 			Valuable m = money.get(i);
 			if (monty >= m.getValue() && currency.equalsIgnoreCase(m.getCurrency())) {
@@ -141,8 +138,7 @@ public class Purse {
 		for (Valuable withDrawnValue : templist) {
 			money.remove(withDrawnValue);
 		}
-//		if (getBalance() < monty)
-//			return null;
+		if (getBalance() < monty) return null;
 
 		Valuable[] array = new Valuable[templist.size()];
 		templist.toArray(array);

@@ -8,9 +8,11 @@ package coinpurse;
 public class ThaiMoneyFactory extends MoneyFactory {
 
 	/* arrays of Thai money */
-	private double[] thaiMoney = new double[] {1, 2, 5, 10, 20, 50, 100, 500, 1000 };
+	private double[] thaiCoins = new double[] {1, 2, 5, 10};
+	private double[] thaiBanknotes = new double[] {20, 50, 100, 500, 1000 };
 	/* Bank note serial number */
 	protected long nextSerialNumber = 1000000;
+	private static final String DEFALT_CURRENCY = "Baht";
 	
 	/**
 	 * create money (coins or bank notes)
@@ -20,15 +22,19 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	 */
 	@Override
 	public Valuable createMoney(double value) {
-		Valuable v = null;
-		for (double d : thaiMoney) {
-			if (d == value){ 
-				if (d >= 1 && d < 20) v = new Coin(value, "Baht");
-				else if(d >= 20) v = new BankNote(value, "Baht", nextSerialNumber++);				
-				else throw new IllegalArgumentException("Cannot create money.");				
+		Valuable valuable = null;
+		if(value >= 1 && value < 20){
+			for(double coins : thaiCoins){
+				if(coins == value) valuable = new Coin(value, DEFALT_CURRENCY);
 			}
+		}else if (value >= 20 && value <= 1000 ) {
+			for(double bankNotes : thaiBanknotes){
+				if(bankNotes == value) valuable = new BankNote(value, DEFALT_CURRENCY, nextSerialNumber++);
+			}
+		}else {
+			throw new IllegalArgumentException("Cannot create money!");
 		}
-		return v;
+		return valuable;
 	}
 
 }
