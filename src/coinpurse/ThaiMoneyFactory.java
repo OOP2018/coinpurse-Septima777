@@ -12,6 +12,7 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	private double[] thaiBanknotes = new double[] {20, 50, 100, 500, 1000 };
 	/* Bank note serial number */
 	protected long nextSerialNumber = 1000000;
+	/** currency of money */
 	private static final String DEFALT_CURRENCY = "Baht";
 	
 	/**

@@ -12,6 +12,7 @@ public class MalayMoneyFactory extends MoneyFactory {
 	private double[] malayBanknotes = new double[] {1, 2, 5, 10, 20, 50, 100};
 	/* Bank note serial number */
 	protected long nextSerialNumber = 1000000000;
+	/** currency of money */
 	private static final String DEFULT_CURRENCY = "Ringgit";
 	private static final String SMALL_CURRENCY = "Sen";
 	/**
