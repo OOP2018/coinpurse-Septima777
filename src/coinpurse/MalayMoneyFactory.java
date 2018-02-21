@@ -26,7 +26,7 @@ public class MalayMoneyFactory extends MoneyFactory {
 		Valuable valuable = null;
 		if(value > 0 && value < 1){
 			for(double coins: malayCoins){
-				if(coins == value) valuable = new Coin(value, SMALL_CURRENCY);
+				if(coins == value) valuable = new Coin(value, DEFULT_CURRENCY, SMALL_CURRENCY);
 			}
 		}else if(value >= 1 && value <= 100){
 			for(double bankNotes : malayBanknotes){

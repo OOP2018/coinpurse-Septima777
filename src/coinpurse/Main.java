@@ -12,21 +12,21 @@ public class Main {
      * @param args not used
      */
     public static void main( String[] args ) {
-        // 1. create a Purse
-    	Purse purse = new Purse(4);
-        // 2. create a ConsoleDialog with a reference to the Purse object
-    	ConsoleDialog ui = new ConsoleDialog(purse);
-        // 3. run the ConsoleDialog
-    	ui.run();
+//        // 1. create a Purse
+//    	Purse purse = new Purse(4);
+//        // 2. create a ConsoleDialog with a reference to the Purse object
+//    	ConsoleDialog ui = new ConsoleDialog(purse);
+//        // 3. run the ConsoleDialog
+//    	ui.run();
     	
     	// 4. run the moneyFactory
-//    	MoneyFactory.setFactory(new ThaiMoneyFactory());
-//    	MoneyFactory factory = MoneyFactory.getInstance();
-//		Valuable m = factory.createMoney(500);
-//		System.out.println(m.toString());
-//		Valuable m2 = factory.createMoney(50);
-////		System.out.println(m2.getCurrency());
-//		System.out.println(m2.toString());
+    	MoneyFactory.setFactory(new ThaiMoneyFactory());
+    	MoneyFactory factory = MoneyFactory.getInstance();
+		Valuable m = factory.createMoney(100);
+		System.out.println(m.toString());
+		Valuable m2 = factory.createMoney(5);
+		System.out.println(m2.getCurrency());
+		System.out.println(m2.toString());
 //		Valuable m3 = factory.createMoney(1000);
 //		System.out.println(m3.toString());
 //		Valuable m5 = factory.createMoney(3000);

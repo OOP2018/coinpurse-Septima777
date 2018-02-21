@@ -37,29 +37,39 @@ public class MoneyFactoryTest {
 	}
 	
 	/** show that can create money for Thai and Malaysia both coins and bank notes */
-	@Test (expected = IllegalArgumentException.class)
+	@Test
 	 public void testCreateMoney() throws IllegalArgumentException{
 		MoneyFactory.setFactory(new ThaiMoneyFactory());
 		MoneyFactory moneyFactory = MoneyFactory.getInstance();
-		Valuable bankNote1 = moneyFactory.createMoney(0);
-		Valuable bankNote2 = moneyFactory.createMoney(1); 
-		Valuable bankNote3 = moneyFactory.createMoney(20);
-		Valuable bankNote4 = moneyFactory.createMoney(2000);
-		assertEquals(bankNote1.getValue(), 0, TOL);
-		assertEquals(bankNote2.getValue(), 1, TOL);
-		assertEquals(bankNote3.getValue(), 20, TOL);
-		assertEquals(bankNote4.getValue(), 2000, TOL);
+		Valuable bankNote1 = moneyFactory.createMoney(1); 
+		Valuable bankNote2 = moneyFactory.createMoney(20);
+		assertEquals(bankNote1.getValue(), 1, TOL);
+		assertEquals(bankNote2.getValue(), 20, TOL);
 		
 		MoneyFactory.setFactory(new MalayMoneyFactory());
 		MoneyFactory moneyFactory2 = MoneyFactory.getInstance();
-		Valuable bankNote5 = moneyFactory.createMoney(0);
-		Valuable bankNote6 = moneyFactory2.createMoney(0.05); 
-		Valuable bankNote7 = moneyFactory2.createMoney(100);
-		Valuable bankNote8 = moneyFactory.createMoney(500);
-		assertEquals(bankNote5.getValue(), 0, TOL);
-		assertEquals(bankNote6.getValue(), 0.05, TOL);
-		assertEquals(bankNote7.getValue(), 100, TOL);
-		assertEquals(bankNote8.getValue(), 500, TOL);
+		Valuable bankNote3 = moneyFactory2.createMoney(0.05); 
+		Valuable bankNote4 = moneyFactory2.createMoney(100);
+		assertEquals(bankNote3.getValue(), 0.05, TOL);
+		assertEquals(bankNote4.getValue(), 100, TOL);
+	 }
+	
+	/** show case that cannot create money for Thai and Malaysia both coins and bank notes */
+	@Test (expected = IllegalArgumentException.class)
+	 public void testCreateMoneyException() throws IllegalArgumentException{
+		MoneyFactory.setFactory(new ThaiMoneyFactory());
+		MoneyFactory moneyFactory = MoneyFactory.getInstance();
+		Valuable bankNote1 = moneyFactory.createMoney(0);
+		Valuable bankNote2 = moneyFactory.createMoney(2000);
+		assertEquals(bankNote1.getValue(), 0, TOL);
+		assertEquals(bankNote2.getValue(), 2000, TOL);
+		
+		MoneyFactory.setFactory(new MalayMoneyFactory());
+		MoneyFactory moneyFactory2 = MoneyFactory.getInstance();
+		Valuable bankNote3 = moneyFactory2.createMoney(0);
+		Valuable bankNote4 = moneyFactory2.createMoney(500);
+		assertEquals(bankNote3.getValue(), 0, TOL);
+		assertEquals(bankNote4.getValue(), 500, TOL);
 	 }
 	
 	/** check serial number of Thai money and Malaysia bank notes */
