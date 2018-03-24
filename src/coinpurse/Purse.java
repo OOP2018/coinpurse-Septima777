@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import coinpurse.strategy.GreedyWithdraw;
+import coinpurse.strategy.RecursiveWithdraw;
+import coinpurse.strategy.WithdrawStrategy;
+
 /**
  * A coin purse contains coins. You can insert coins, withdraw money, check the
  * balance, and check if the purse is full.
@@ -15,8 +19,9 @@ import java.util.List;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	private List<Valuable> money;
+	private List<Valuable> money = new ArrayList<Valuable>();
 	Comparator<Valuable> comp = new ValueComparator();
+	private WithdrawStrategy strategy;
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
 	 * when the purse is created and cannot be changed.
@@ -31,7 +36,9 @@ public class Purse {
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
-		money = new ArrayList<Valuable>();
+		setWithdrawStrategy(new GreedyWithdraw());
+//		setWithdrawStrategy(new RecursiveWithdraw());
+		
 	}
 
 	/**
@@ -42,6 +49,15 @@ public class Purse {
 	 */
 	public int count() {
 		return money.size();
+	}
+	
+	/**
+	 * This method help us to choose the way to withdraw money.
+	 * There are 2 ways, Greed and Recursion
+	 * @param strategy is the way to withdraw either greedy or recursion.
+	 */
+	public void setWithdrawStrategy(WithdrawStrategy strategy){
+		this.strategy = strategy;
 	}
 
 	/**
@@ -107,8 +123,7 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {
-		Money money = new Money(amount, "Baht");
-		return withdraw(money);
+		return withdraw(new Money(amount, "Baht"));
 	}
 
 	/**
@@ -121,30 +136,18 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(Valuable amount) {
-		double monty = amount.getValue();
-		String currency = amount.getCurrency();
-		if (monty < 0) return null;
-		List<Valuable> templist = new ArrayList<Valuable>();
-		Collections.sort(money, comp);
-		Collections.reverse(money); 
-		for (int i = 0; i < money.size(); i++) {
-			Valuable m = money.get(i);
-			if (monty >= m.getValue() && currency.equalsIgnoreCase(m.getCurrency())) {
-				monty = monty - m.getValue();
-				templist.add(m);
-			}
-		}
-		if (monty != 0)	return null;
-		for (Valuable withDrawnValue : templist) {
+
+		List<Valuable> list = strategy.withdraw(amount, money);
+		
+		if(list == null) return null;
+		for (Valuable withDrawnValue : list) {
 			money.remove(withDrawnValue);
 		}
-		if (getBalance() < monty) return null;
-
-		Valuable[] array = new Valuable[templist.size()];
-		templist.toArray(array);
-
-		return array;
-	}
+		
+		Valuable[] array = new Valuable[list.size()];
+		return list.toArray(array);
+		
+}
 
 	/**
 	 * toString returns a string description of the purse contents. It can

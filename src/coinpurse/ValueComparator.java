@@ -24,7 +24,7 @@ public class ValueComparator implements Comparator<Valuable> {
 	public int compare(Valuable o1, Valuable o2) {
 		int moneyCurrency = o1.getCurrency().compareToIgnoreCase(o2.getCurrency()); 
 		if(moneyCurrency == 0){
-			Double.compare(o1.getValue(), o2.getValue());
+			return Double.compare(o1.getValue(), o2.getValue());
 		}
 		return moneyCurrency;
 	}
