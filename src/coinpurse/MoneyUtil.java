@@ -72,33 +72,5 @@ public class MoneyUtil {
 		return maxNumber;
 	}
 
-	/**
-	 * run the program for check printCoins method and compareTo method.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// List<BankNote> value = new ArrayList<BankNote>();
-		// // value.add(new Coin(10.0, "ht"));
-		// value.add(new BankNote(10.0, "USD", 1));
-		// value.add(new BankNote(500.0, "Baht", 2));
-		// // value.add(new Coin(1.5, "Baht"));
-		// value.add(new BankNote(20.0, "Baht", 3));
-		// // printValue(value);
-		// System.out.println("==========================================");
-		// sortMoney(value);
-		// printValue(value);
-		// System.out.println("==========================================");
-		// System.out.println(filterByCurrency(value, "Baht"));
-
-//		Money m1 = new BankNote(1000, "Baht", 1);
-//		Money m2 = new BankNote(700, "Baht", 2);
-//		Money m3 = new BankNote(3000, "Baht", 3);
-//		Money max = MoneyUtil.max(m1, m2, m3);
-//		System.out.println(max);
-		
-		List<Coin> coins = Arrays.asList(new Coin(5, "Baht"), new Coin(10,"Baht"), new Coin(5,"Cent"));
-		List<Coin> result = MoneyUtil.filterByCurrency(coins, "Baht");
-		System.out.println(result);
-	}
+	
 }
