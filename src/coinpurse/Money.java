@@ -50,7 +50,7 @@ public class Money implements Valuable {
 
 		int moneyCurrency = this.getCurrency().compareToIgnoreCase(arg.getCurrency()); 
 		if(moneyCurrency == 0){
-			Double.compare(this.getValue(), arg.getValue());
+			return Double.compare(this.getValue(), arg.getValue());
 		}
 		return moneyCurrency;
 	
